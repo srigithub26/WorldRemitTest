@@ -1,0 +1,40 @@
+package KieRule;
+
+import com.ruleengine.rest.api.model.PurchaseOrder;
+import com.ruleengine.rest.api.model.Customer;
+import com.ruleengine.rest.api.model.ProductCategory;
+import com.ruleengine.rest.api.model.Membership;
+import com.ruleengine.rest.api.model.LineItem;
+
+
+rule " BR1: purchase order contains a membership "
+when
+purchaseOrderObject: PurchaseOrder();
+then
+System.out.println("\n BR1:purchase order contains a membership");
+
+for(LineItem lineItem:purchaseOrderObject.getLineItems()){
+	if(lineItem.getProductCategory() == ProductCategory.BOOK_CLUB){
+		purchaseOrderObject.getCustomer().setMembership(Membership.BOOK_CLUB);
+	}
+	else if(lineItem.getProductCategory() == ProductCategory.VIDEO_CLUB){
+		purchaseOrderObject.getCustomer().setMembership(Membership.VIDEO_CLUB);
+	}
+	else if(lineItem.getProductCategory() == ProductCategory.PREMIUM){
+		purchaseOrderObject.getCustomer().setMembership(Membership.PREMIUM);
+	}
+}
+end;//end of BR1
+
+rule " BR2: purchase order contains a physical product "
+when
+purchaseOrderObject: PurchaseOrder();
+then
+System.out.println("\n BR2:purchase order contains a physical product");
+
+for(LineItem lineItem:purchaseOrderObject.getLineItems()){
+	if(lineItem.getProductCategory() == ProductCategory.PHYSICAL){
+		lineItem.setShippingSlipGenerated(true);
+	}
+}
+end; //end of BR2
