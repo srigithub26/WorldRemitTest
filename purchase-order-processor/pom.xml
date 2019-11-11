@@ -10,10 +10,10 @@
 		<relativePath />
 	</parent>
 	<groupId>com.worldremit</groupId>
-	<artifactId>purchase-order-engine</artifactId>
+	<artifactId>purchase-order-processor</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>purchase-order-engine</name>
-	<description>Purchase Order Engine</description>
+	<name>purchase-order-processor</name>
+	<description>Purchase Order Processor</description>
 
 	<properties>
 		<java.version>1.8</java.version>
